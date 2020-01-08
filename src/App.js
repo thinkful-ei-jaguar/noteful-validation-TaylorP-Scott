@@ -2,6 +2,7 @@ import React from 'react';
 import Home from './Home';
 import Sidebar from './Sidebar';
 import Notes from './Notes';
+import Note from './note';
 import './App.css';
 import dummy from './dummy-store';
 import {Route, Switch} from 'react-router-dom';
@@ -13,6 +14,7 @@ export default class App extends React.Component {
       folders :[],
       notes:[],
       folderid:'',
+      noteid:'',
     }
   }
 
@@ -48,7 +50,12 @@ changefolderid=(value)=>{
           path='/folder/:folderid'
           render={props => <Notes {...props} notes={this.state.notes} folderid={this.state.folderid} />}
           />
+          <Route 
+          path='/note/:noteid'
+          render={props => <Note {...props} notes={this.state.notes} noteid={this.state.noteid} />}
+          />
         </Switch>
+        
         </div>
       </>
     );

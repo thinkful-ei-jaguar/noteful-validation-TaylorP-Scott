@@ -1,16 +1,17 @@
 import React from 'react';
 import './Notes.css';
+import {Link} from 'react-router-dom';
+
 
 export default class Notes extends React.Component {
     render(){
         const notes = this.props.notes
         .filter(note=>note.folderId===this.props.match.params.folderid)
-        
         .map((note)=>
-        <div className="notebox" id={note.id}>
+        <Link className="folder box" id={note.id} to={`/note/${note.id}`}>
           <h2>{note.name}</h2>
-          <p>{note.content}</p>
-        </div>
+        </Link>
+
       );
       console.log(this.props.folderid);
       return (
