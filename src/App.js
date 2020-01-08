@@ -4,7 +4,7 @@ import Sidebar from './Sidebar';
 import Notes from './Notes';
 import './App.css';
 import dummy from './dummy-store';
-import {Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
 export default class App extends React.Component {
   constructor(props){
@@ -25,7 +25,7 @@ export default class App extends React.Component {
   })
   
 }
-chagefolderid=value=>{
+changefolderid=(value)=>{
   console.log(this.state.folderid);
   console.log(value);
   this.setState({
@@ -42,8 +42,13 @@ chagefolderid=value=>{
           <Route path='/' component={Home} /> 
         </main>
         <div className="holder">
-          <Sidebar folders={this.state.folders} chagefolderid={this.chagefolderid}/>
-          <Notes notes={this.state.notes} folderid={this.state.folderid}/>
+        <Sidebar folders={this.state.folders} changefolderid={this.changefolderid}/>
+        <Switch>
+          <Route 
+          path='/folder/:folderid'
+          render={props => <Notes {...props} notes={this.state.notes} folderid={this.state.folderid} />}
+          />
+        </Switch>
         </div>
       </>
     );

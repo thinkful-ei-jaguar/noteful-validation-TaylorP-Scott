@@ -1,13 +1,20 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 export default class Sidebar extends React.Component {
+
+  changeId(value){
+    this.props.changefolderid(value)
+  }
+
+
     render(){
       //console.log(this.props.folders)
 
       const folders = this.props.folders.map((folder)=>
-        <div class="folder box" value={folder.id} onClick={e=>this.props.chagefolderid(e.target.value)}>
+        <Link className="folder box" id={folder.id} to={`/folder/${folder.id}`}>
           <h2>{folder.name}</h2>
-        </div>
+        </Link>
       );
       //console.log(folders)
 
@@ -18,3 +25,5 @@ export default class Sidebar extends React.Component {
       );
     }
   }
+
+  //e=>this.props.chagefolderid(e.target.value)
