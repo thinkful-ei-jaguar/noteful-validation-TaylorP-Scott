@@ -1,12 +1,10 @@
 import React from 'react';
 import './Notes.css';
-import FoldersContext from './context/FoldersContext';
+import ApiContext from './context/ApiContext';
 
 
 export default class Note extends React.Component {
-
-
-        static contextType = FoldersContext;
+        static contextType = ApiContext;
         render(){
         const notes = this.context.notes
         .filter(note=>note.id===this.props.match.params.noteid)

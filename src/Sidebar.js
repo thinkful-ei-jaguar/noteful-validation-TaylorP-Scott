@@ -1,13 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import FoldersContext from './context/FoldersContext';
+import ApiContext from './context/ApiContext';
 
 export default class Sidebar extends React.Component {
 
   changeId(value){
     this.props.changefolderid(value)
   }
-  static contextType = FoldersContext;
+  static contextType = ApiContext;
 
   render(){
     const folders = this.context.folders.map((folder)=>

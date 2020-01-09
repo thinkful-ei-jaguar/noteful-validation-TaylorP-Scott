@@ -6,7 +6,7 @@ import Note from './note';
 import './App.css';
 //import dummy from './dummy-store';
 import {Route, Switch} from 'react-router-dom';
-import FoldersContext from './context/FoldersContext';
+import ApiContext from './context/ApiContext';
 
 export default class App extends React.Component {
   constructor(props){
@@ -81,10 +81,10 @@ export default class App extends React.Component {
           <Route path='/' component={Home} /> 
         </main>
         <div className="holder">
-        <FoldersContext.Provider value={{
+        <ApiContext.Provider value={{
                 folders: this.state.folders,
                 notes: this.state.notes,
-                deletehandlenote:this.deletehandlenote,
+                deletehandlenote: this.deletehandlenote,
 
             }}>
           <Sidebar />
@@ -99,7 +99,7 @@ export default class App extends React.Component {
             />
             
           </Switch>
-        </FoldersContext.Provider>
+        </ApiContext.Provider>
         </div>
       </>
     );
