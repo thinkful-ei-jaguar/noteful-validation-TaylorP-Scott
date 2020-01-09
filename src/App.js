@@ -4,8 +4,9 @@ import Sidebar from './Sidebar';
 import Notes from './Notes';
 import Note from './note';
 import './App.css';
-import dummy from './dummy-store';
+//import dummy from './dummy-store';
 import {Route, Switch} from 'react-router-dom';
+import FoldersContext from './context/FoldersContext';
 
 export default class App extends React.Component {
   constructor(props){
@@ -13,29 +14,65 @@ export default class App extends React.Component {
     this.state={
       folders :[],
       notes:[],
-      folderid:'',
-      noteid:'',
     }
   }
 
   componentDidMount(){
-  console.log(dummy);
-  this.setState({
-    folders:dummy.folders,
-    notes:dummy.notes,
-    folderid:dummy.folders[0].id,
-  })
-  
-}
-changefolderid=(value)=>{
-  console.log(this.state.folderid);
-  console.log(value);
-  this.setState({
-    folderid:value
-  });
-  console.log(this.state.folderid);
-  //event.preventDefault();
-}
+    fetch(`http://localhost:9090/folders`, {
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json'
+    },
+    })
+    .then(res=>res.json())
+    .then(data=>{
+    this.setState({
+      folders:data,
+    })
+    
+    })
+    fetch(`http://localhost:9090/notes`, {
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json'
+    },
+    })
+    .then(res=>res.json())
+    .then(data=>{
+    this.setState({
+      notes:data,
+    })
+    })
+  }
+
+
+  deletehandlenote =(id) =>{
+    const newNotes = this.state.notes.filter(notes =>
+    notes.id !== id
+    )
+    this.setState({
+      notes: newNotes,
+    })
+    return fetch(`http://localhost:9090/notes/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      },
+    })
+    .then(res => {
+      if (!res.ok) {
+        return res.json().then(error => { 
+          throw error
+        })
+      }
+      return res.json()
+    })
+    .catch(error => {
+      console.error(error)
+    })
+    
+  }
+
 
   render(){
     return (
@@ -44,26 +81,27 @@ changefolderid=(value)=>{
           <Route path='/' component={Home} /> 
         </main>
         <div className="holder">
-        <Sidebar folders={this.state.folders} changefolderid={this.changefolderid}/>
-        <Switch>
-          <Route 
-          path='/folder/:folderid'
-          render={props => <Notes {...props} notes={this.state.notes} folderid={this.state.folderid} />}
-          />
-          <Route 
-          path='/note/:noteid'
-          render={props => <Note {...props} notes={this.state.notes} noteid={this.state.noteid} />}
-          />
-        </Switch>
-        
+        <FoldersContext.Provider value={{
+                folders: this.state.folders,
+                notes: this.state.notes,
+                deletehandlenote:this.deletehandlenote,
+
+            }}>
+          <Sidebar />
+          <Switch>
+            <Route 
+            path='/folder/:folderid'
+            render={props => <Notes {...props} />}
+            />
+            <Route 
+            path='/note/:noteid'
+            render={(props,history) => <Note {...props}  />}
+            />
+            
+          </Switch>
+        </FoldersContext.Provider>
         </div>
       </>
     );
   }
 }
-/* <div className="holder">
-            <Route path='/' component={Sidebar} />
-        
-            <Route path='/' component={Notes} />
-        </div>
-    */

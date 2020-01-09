@@ -1,25 +1,23 @@
 import React from 'react';
 import './Notes.css';
+import FoldersContext from './context/FoldersContext';
 
 
 export default class Note extends React.Component {
+
+
+        static contextType = FoldersContext;
         render(){
-        //console.log(this.props.match)
-        console.log(this.props.notes);
-        console.log(this.props.match.params.noteid);
-        const notes = this.props.notes
+        const notes = this.context.notes
         .filter(note=>note.id===this.props.match.params.noteid)
         .map((note)=>
         <div >
             <h2>{note.name}</h2>
             <h3>date modified:{note.modified}</h3>
-        <p>{note.content}</p>
-
+            <p>{note.content}</p>
+            <button  type="button" onClick={()=>this.context.deletehandlenote(note.id).then(()=>{this.props.history.push('/')})}>delete</button>
         </div>
       );
-        console.log(notes);
-      //console.log(this.props.folderid);
-     
       return (
         <div className="onenote">
             <h1>{notes}</h1>
@@ -27,7 +25,3 @@ export default class Note extends React.Component {
       );
     }
   }
-  /*<div className="folder box" id={note.id}>
-          <h2>{note.name}</h2>
-          <p>{note.content}</p>
-        </div>>*/

@@ -1,29 +1,24 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import FoldersContext from './context/FoldersContext';
 
 export default class Sidebar extends React.Component {
 
   changeId(value){
     this.props.changefolderid(value)
   }
+  static contextType = FoldersContext;
 
-
-    render(){
-      //console.log(this.props.folders)
-
-      const folders = this.props.folders.map((folder)=>
-        <Link className="folder box" id={folder.id} to={`/folder/${folder.id}`}>
-          <h2>{folder.name}</h2>
-        </Link>
-      );
-      //console.log(folders)
-
-      return (
-        <div>
-          {folders}
-        </div>
-      );
-    }
+  render(){
+    const folders = this.context.folders.map((folder)=>
+      <Link className="folder box" id={folder.id} to={`/folder/${folder.id}`}>
+        <h2>{folder.name}</h2>
+      </Link>
+    );
+    return (
+      <div>
+        {folders}
+      </div>
+    );
   }
-
-  //e=>this.props.chagefolderid(e.target.value)
+}

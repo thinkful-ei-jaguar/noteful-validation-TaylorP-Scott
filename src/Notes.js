@@ -1,19 +1,23 @@
 import React from 'react';
 import './Notes.css';
 import {Link} from 'react-router-dom';
+import FoldersContext from './context/FoldersContext';
 
 
 export default class Notes extends React.Component {
+
+  static contextType = FoldersContext;
     render(){
-        const notes = this.props.notes
+        const notes = this.context.notes
         .filter(note=>note.folderId===this.props.match.params.folderid)
         .map((note)=>
+        <>
         <Link className="folder box" id={note.id} to={`/note/${note.id}`}>
           <h2>{note.name}</h2>
         </Link>
-
+        <button  type="button" onClick={()=>this.context.deletehandlenote(note.id)}>delete</button>
+        </>
       );
-      console.log(this.props.folderid);
       return (
         <div className="noteholder">
             {notes}
