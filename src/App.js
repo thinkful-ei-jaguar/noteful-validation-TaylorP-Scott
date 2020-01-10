@@ -5,8 +5,10 @@ import Notes from './Notes';
 import Note from './note';
 import './App.css';
 //import dummy from './dummy-store';
-import {Route, Switch} from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import ApiContext from './context/ApiContext';
+import AddFolder from './AddFolder'
 
 export default class App extends React.Component {
   constructor(props){
@@ -32,21 +34,21 @@ export default class App extends React.Component {
       
       })
       fetch(`http://localhost:9090/notes`, {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json'
-      },
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json'
+        },
+        })
+        .then(res=>res.json())
+        .then(data=>{
+        this.setState({
+          notes:data,
+        })
       })
-      .then(res=>res.json())
-      .then(data=>{
-      this.setState({
-        notes:data,
-      })
-    })
   }
 
 
-  deletehandlenote =(id) =>{
+  deletehandlenote = (id) =>{
     const newNotes = this.state.notes.filter(notes =>
     notes.id !== id
     )
@@ -73,6 +75,12 @@ export default class App extends React.Component {
     
   }
 
+  addFolder = (value) => {
+    this.setState({
+      folders: [...this.state.folders, value]
+    })
+  }
+
 
   render(){
     return (
@@ -81,13 +89,15 @@ export default class App extends React.Component {
           <Route path='/' component={Home} /> 
         </main>
         <div className="holder">
+  
         <ApiContext.Provider value={{
                 folders: this.state.folders,
                 notes: this.state.notes,
                 deletehandlenote: this.deletehandlenote,
-
+                addFolder: this.addFolder
             }}>
           <Sidebar />
+    
           <Switch>
             <Route 
             path='/folder/:folderid'
@@ -97,7 +107,10 @@ export default class App extends React.Component {
             path='/note/:noteid'
             render={(props,history) => <Note {...props}  />}
             />
-            
+             <Route 
+            path='/addfolder'
+            render={(props,history) => <AddFolder {...props}  />}
+            />
           </Switch>
         </ApiContext.Provider>
         </div>
