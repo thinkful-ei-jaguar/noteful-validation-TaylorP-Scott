@@ -4,12 +4,11 @@ import Sidebar from './Sidebar';
 import Notes from './Notes';
 import Note from './note';
 import './App.css';
-//import dummy from './dummy-store';
-// import { Link } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
 import ApiContext from './context/ApiContext';
-import AddFolder from './AddFolder'
-import AddNote from './AddNote'
+import AddFolder from './AddFolder';
+import AddNote from './AddNote';
+import BoundaryError from './BoundaryError';
 
 export default class App extends React.Component {
   constructor(props){
@@ -115,14 +114,16 @@ export default class App extends React.Component {
             path='/note/:noteid'
             render={(props,history) => <Note {...props}  />}
             />
-             <Route 
-            path='/addfolder'
-            render={(props,history) => <AddFolder {...props}  />}
-            />
-            <Route 
-            path='/addNote'
-            render={(props,history) => <AddNote {...props}  />}
-            />
+            <BoundaryError>
+              <Route 
+              path='/addfolder'
+              render={(props,history) => <AddFolder {...props}  />}
+              />
+              <Route 
+              path='/addNote'
+              render={(props,history) => <AddNote {...props}  />}
+              />
+            </BoundaryError>
           </Switch>
         </ApiContext.Provider>
         </div>
