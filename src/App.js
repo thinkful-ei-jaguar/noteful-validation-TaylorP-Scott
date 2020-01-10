@@ -16,32 +16,32 @@ export default class App extends React.Component {
       notes:[],
     }
   }
-
+  
   componentDidMount(){
-    fetch(`http://localhost:9090/folders`, {
-    method: 'GET',
-    headers: {
-      'content-type': 'application/json'
-    },
-    })
-    .then(res=>res.json())
-    .then(data=>{
-    this.setState({
-      folders:data,
-    })
-    
-    })
-    fetch(`http://localhost:9090/notes`, {
-    method: 'GET',
-    headers: {
-      'content-type': 'application/json'
-    },
-    })
-    .then(res=>res.json())
-    .then(data=>{
-    this.setState({
-      notes:data,
-    })
+      fetch(`http://localhost:9090/folders`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json'
+      },
+      })
+      .then(res=>res.json())
+      .then(data=>{
+      this.setState({
+        folders:data,
+      })
+      
+      })
+      fetch(`http://localhost:9090/notes`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json'
+      },
+      })
+      .then(res=>res.json())
+      .then(data=>{
+      this.setState({
+        notes:data,
+      })
     })
   }
 
