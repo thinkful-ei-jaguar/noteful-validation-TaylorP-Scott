@@ -1,31 +1,36 @@
 import React from 'react'
+import ApiContext from './context/ApiContext'
 
 
 class AddFolder extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      folder: {
-        name: ''
-      }
-    }
-  }
+  static contextType = ApiContext;
 
-  handleSubmit = (event) =>{
+  handleSubmit = (value) =>{
     fetch(`http://localhost:9090/folders`, {
       method: 'POST',
         headers: {
           'content-type': 'application/json'
         },
-        body: JSON.stringify(this.state.folder)
+        body: JSON.stringify({name: value})
       })
-      .then(res=>res.json())
+      .then(res=>{
+        if(res.ok){
+          return res.json()
+        }
+        else {
+          throw new Error('Response not okay')
+        }
+      })
       .then(data=>{
         this.context.addFolder(data)
       })
-      // .catch(err => )
+      .catch(err =>{
+        console.error(err);
+      } )
 
   }
+
+  
 
 
 
@@ -34,8 +39,8 @@ class AddFolder extends React.Component {
 
     return(
       <div>
-        <form onSubmit={e => this.handleSubmit()}>
-          <input type='text' name='folderNameInput' onChange={e => this.context.addFolder(e.currentTarget.value)} >
+        <form onSubmit={() => this.handleSubmit((document.getElementById('folderNameInput').value))}>
+          <input type='text' name='folderNameInput' id='folderNameInput' >
           </input>
           <button type='submit'>Add Folder</button>
         </form>
@@ -44,4 +49,5 @@ class AddFolder extends React.Component {
   }
 }
 
-export default AddFolder
+export default AddFolder;
+// onChange={e => this.context.addFolder(e.currentTarget.value)} --

@@ -9,6 +9,7 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import ApiContext from './context/ApiContext';
 import AddFolder from './AddFolder'
+import AddNote from './AddNote'
 
 export default class App extends React.Component {
   constructor(props){
@@ -16,6 +17,7 @@ export default class App extends React.Component {
     this.state={
       folders :[],
       notes:[],
+      error: null
     }
   }
   
@@ -81,6 +83,12 @@ export default class App extends React.Component {
     })
   }
 
+  addNote = (value) => {
+    this.setState({
+      notes: [...this.state.notes, value]
+    })
+  }
+
 
   render(){
     return (
@@ -110,6 +118,10 @@ export default class App extends React.Component {
              <Route 
             path='/addfolder'
             render={(props,history) => <AddFolder {...props}  />}
+            />
+            <Route 
+            path='/addNote'
+            render={(props,history) => <AddNote {...props}  />}
             />
           </Switch>
         </ApiContext.Provider>

@@ -2,6 +2,7 @@ import React from 'react';
 import './Notes.css';
 import {Link} from 'react-router-dom';
 import ApiContext from './context/ApiContext';
+import AddNote from './AddNote';
 
 
 
@@ -22,6 +23,14 @@ export default class Notes extends React.Component {
       return (
         <div className="noteholder">
             {notes}
+            <br />
+            <br />
+            <Link 
+              className="new note " 
+              to={`/addNote`}
+            >
+            <button type='button'>Add Note</button>
+            </Link>
         </div>
       );
     }
