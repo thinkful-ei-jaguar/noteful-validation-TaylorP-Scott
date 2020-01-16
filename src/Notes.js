@@ -24,8 +24,6 @@ export default class Notes extends React.Component {
       return (
         <div className="noteholder">
             {notes}
-            <br />
-            <br />
             <Link 
               className="new note " 
               to={`/addNote`}

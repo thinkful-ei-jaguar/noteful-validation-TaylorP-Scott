@@ -1,7 +1,7 @@
 import React from 'react';
-import './Notes.css';
 import ApiContext from './context/ApiContext';
 import PropTypes from 'prop-types'
+import './note.css'
 
 
 export default class Note extends React.Component {
@@ -11,10 +11,10 @@ export default class Note extends React.Component {
         .filter(note=>note.id===this.props.match.params.noteid)
         .map((note)=>
         <div key={note.id}>
-            <h2>{note.name}</h2>
-            <h3>date modified:{note.modified}</h3>
-            <p>{note.content}</p>
-            <button type="button" onClick={()=>this.context.deletehandlenote(note.id).then(()=>{this.props.history.push('/')})}>delete</button>
+            <h2 className='noteTitle'>{note.name}</h2>
+            <h3 className='noteDate'>Date Created: {note.modified}</h3>
+            <p className='noteContent'>{note.content}</p>
+            <button className='noteDeleteButton'type="button" onClick={()=>this.context.deletehandlenote(note.id).then(()=>{this.props.history.push('/')})}>delete</button>
         </div>
       );
       return (
