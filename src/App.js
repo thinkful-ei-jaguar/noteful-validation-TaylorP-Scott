@@ -101,7 +101,8 @@ export default class App extends React.Component {
                 folders: this.state.folders,
                 notes: this.state.notes,
                 deletehandlenote: this.deletehandlenote,
-                addFolder: this.addFolder
+                addFolder: this.addFolder,
+                addNote: this.addNote
             }}>
           <Sidebar />
     

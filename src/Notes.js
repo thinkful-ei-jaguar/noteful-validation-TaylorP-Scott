@@ -2,7 +2,7 @@ import React from 'react';
 import './Notes.css';
 import {Link} from 'react-router-dom';
 import ApiContext from './context/ApiContext';
-import AddNote from './AddNote';
+// import AddNote from './AddNote';
 
 
 

@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
-import ApiContext from './context/ApiContext'
+import React, { Component } from 'react';
+import ApiContext from './context/ApiContext';
+// import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default class AddNote extends Component {
   static contextType = ApiContext;
@@ -28,13 +30,12 @@ export default class AddNote extends Component {
           throw new Error('Response not okay')
         }
       })
-      .then(data=>{
+      .then(data => {
         this.context.addNote(data)
       })
-      .catch(err =>{
+      .catch(err => {
         console.error(err);
-      } )
-
+      })
   }
 
   checkTarget=(e, val1, val2, val3)=>{
@@ -52,28 +53,31 @@ export default class AddNote extends Component {
  
     return(
       <>
-      <form className='add-note-form' onSubmit={() => this.handleNoteSubmit( 
-        document.getElementById('note-name-input').value,
-        document.getElementById('note-content-input').value,
-        document.getElementById('folder-input').value)}>
+      <form className='add-note-form' onSubmit={(event) => this.handleNoteSubmit(event, 
+        event.target.noteNameInput.value,
+        event.target.noteContentInput.value,
+        event.target.folderInput.value
+        )}>
 
         <label htmlFor='note-name-input'>Note Name:
-        <input type='text' className='note-name-input' id='note-name-input' name='note-name-input' ></input>
+        <input type='text' className='note-name-input' id='note-name-input' name='noteNameInput' ></input>
         </label>
         <label htmlFor='note-content-input'>Content:
-        <textarea rows='4' cols='50' className='note-content-input' name='note-content-input' id='note-content-input'></textarea>
+        <textarea rows='4' cols='50' className='note-content-input' name='noteContentInput' ></textarea>
         </label>
-        <select className='folder-input' id='folder-input' >
+        <select className='folder-input' name='folderInput' >
           {folderList}
         </select>
+        {/* <Link to={'/note/'} > */}
         <button type='submit'>Add Note</button>
+        {/* </Link> */}
       </form>
       </>
     );
   }
-
 }
 
-// handleNS(val1, val2, val3)
-
-// val1 = (document.getElementById('folderNameInput').value)
+AddNote.propTypes = {
+  name: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired
+};

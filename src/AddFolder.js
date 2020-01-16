@@ -36,10 +36,9 @@ class AddFolder extends React.Component {
 
   render(){
 
-
     return(
       <div>
-        <form onSubmit={() => this.handleSubmit((document.getElementById('folderNameInput').value))}>
+        <form onSubmit={(event) => this.handleSubmit(event.target.folderNameInput.value)}>
           <input type='text' name='folderNameInput' id='folderNameInput' >
           </input>
           <button type='submit'>Add Folder</button>
