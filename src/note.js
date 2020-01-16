@@ -13,7 +13,7 @@ export default class Note extends React.Component {
             <h2>{note.name}</h2>
             <h3>date modified:{note.modified}</h3>
             <p>{note.content}</p>
-            <button  type="button" onClick={()=>this.context.deletehandlenote(note.id).then(()=>{this.props.history.push('/')})}>delete</button>
+            <button type="button" onClick={()=>this.context.deletehandlenote(note.id).then(()=>{this.props.history.push('/')})}>delete</button>
         </div>
       );
       return (

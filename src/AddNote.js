@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import ApiContext from './context/ApiContext';
 // import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import {withRouter} from 'react-router-dom'
 
-export default class AddNote extends Component {
+class AddNote extends Component {
   static contextType = ApiContext;
 
   handleNoteSubmit = (event, name, content, folder) =>{
@@ -32,7 +33,9 @@ export default class AddNote extends Component {
       })
       .then(data => {
         this.context.addNote(data)
+        this.props.history.push('/folder')
       })
+
       .catch(err => {
         console.error(err);
       })
@@ -53,7 +56,7 @@ export default class AddNote extends Component {
  
     return(
       <>
-      <form className='add-note-form' onSubmit={(event) => this.handleNoteSubmit(event, 
+      <form className='add-note-form' onSubmit={(event) => this.handleNoteSubmit( 
         event.target.noteNameInput.value,
         event.target.noteContentInput.value,
         event.target.folderInput.value
@@ -68,16 +71,17 @@ export default class AddNote extends Component {
         <select className='folder-input' name='folderInput' >
           {folderList}
         </select>
-        {/* <Link to={'/note/'} > */}
-        <button type='submit'>Add Note</button>
-        {/* </Link> */}
+       
+        <button type='submit'>Submit</button>
       </form>
       </>
     );
   }
 }
 
-AddNote.propTypes = {
-  name: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired
-};
+export default withRouter(AddNote)
+
+// AddNote.propTypes = {
+//   name: PropTypes.string.isRequired,
+//   content: PropTypes.string.isRequired
+// };

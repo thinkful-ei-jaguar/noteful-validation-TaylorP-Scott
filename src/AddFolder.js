@@ -4,7 +4,7 @@ import ApiContext from './context/ApiContext'
 
 class AddFolder extends React.Component {
   static contextType = ApiContext;
-
+  
   handleSubmit = (value) =>{
     fetch(`http://localhost:9090/folders`, {
       method: 'POST',
@@ -35,7 +35,7 @@ class AddFolder extends React.Component {
 
 
   render(){
-
+    console.log(this.props)
     return(
       <div>
         <form onSubmit={(event) => this.handleSubmit(event.target.folderNameInput.value)}>
