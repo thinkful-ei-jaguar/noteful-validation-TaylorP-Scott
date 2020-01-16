@@ -4,9 +4,9 @@ import ApiContext from './context/ApiContext';
 
 export default class Sidebar extends React.Component {
 
-  // changeId(value){
-  //   this.props.changefolderid(value)
-  // }
+  changeId(value){
+    this.props.changefolderid(value)
+  }
   static contextType = ApiContext;
 
   render(){

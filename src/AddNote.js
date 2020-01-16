@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import ApiContext from './context/ApiContext';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+// import { Link } from 'react-router-dom';
+// import PropTypes from 'prop-types';
+import {withRouter} from 'react-router-dom'
 
-export default class AddNote extends Component {
+class AddNote extends Component {
   static contextType = ApiContext;
 
   handleNoteSubmit = (name, content, folder) =>{
@@ -32,7 +33,7 @@ export default class AddNote extends Component {
       })
       .then(data => {
         this.context.addNote(data)
-        // this.props.history.goBack()
+        this.props.history.push('/folder')
       })
 
       .catch(err => {
@@ -55,7 +56,7 @@ export default class AddNote extends Component {
  
     return(
       <>
-      <form className='add-note-form' onSubmit={(event) => this.handleNoteSubmit(event, 
+      <form className='add-note-form' onSubmit={(event) => this.handleNoteSubmit( 
         event.target.noteNameInput.value,
         event.target.noteContentInput.value,
         event.target.folderInput.value
@@ -77,6 +78,8 @@ export default class AddNote extends Component {
     );
   }
 }
+
+export default withRouter(AddNote)
 
 // AddNote.propTypes = {
 //   name: PropTypes.string.isRequired,
