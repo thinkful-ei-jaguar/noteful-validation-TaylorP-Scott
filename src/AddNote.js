@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 export default class AddNote extends Component {
   static contextType = ApiContext;
 
-  handleNoteSubmit = (name, content, folder) =>{
+  handleNoteSubmit = (event, name, content, folder) =>{
     let tempDate = new Date();
     let date = tempDate.getFullYear() + '-' + (tempDate.getMonth()+1) + '-' + tempDate.getDate() +'T'+ tempDate.getHours()+':'+ tempDate.getMinutes()+':'+ tempDate.getSeconds()+'Z';
     
