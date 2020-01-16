@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ApiContext from './context/ApiContext';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default class AddNote extends Component {
@@ -32,7 +32,9 @@ export default class AddNote extends Component {
       })
       .then(data => {
         this.context.addNote(data)
+        // this.props.history.goBack()
       })
+
       .catch(err => {
         console.error(err);
       })
@@ -68,16 +70,15 @@ export default class AddNote extends Component {
         <select className='folder-input' name='folderInput' >
           {folderList}
         </select>
-        {/* <Link to={'/note/'} > */}
-        <button type='submit'>Add Note</button>
-        {/* </Link> */}
+       
+        <button type='submit'>Submit</button>
       </form>
       </>
     );
   }
 }
 
-AddNote.propTypes = {
-  name: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired
-};
+// AddNote.propTypes = {
+//   name: PropTypes.string.isRequired,
+//   content: PropTypes.string.isRequired
+// };
