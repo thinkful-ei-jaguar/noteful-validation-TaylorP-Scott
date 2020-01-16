@@ -1,5 +1,6 @@
 import React from 'react'
 import ApiContext from './context/ApiContext'
+import PropTypes from 'prop-types';
 
 
 class AddFolder extends React.Component {
@@ -32,9 +33,6 @@ class AddFolder extends React.Component {
 
   }
 
-  
-
-
 
   render(){
     //console.log(this.props)
@@ -50,5 +48,12 @@ class AddFolder extends React.Component {
   }
 }
 
+
+AddFolder.propTypes = {
+  history: PropTypes.object,
+  addFolder: PropTypes.func
+}; 
+
 export default AddFolder;
-// onChange={e => this.context.addFolder(e.currentTarget.value)} --
+
+

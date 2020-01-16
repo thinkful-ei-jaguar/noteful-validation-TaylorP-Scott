@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import ApiContext from './context/ApiContext';
+import PropTypes from 'prop-types';
 
 export default class Sidebar extends React.Component {
 
@@ -12,23 +13,29 @@ export default class Sidebar extends React.Component {
   render(){
     const folders = this.context.folders.map((folder)=>
       <Link 
-      className="folder box" 
+      className="folderBox" 
       id={folder.id}
       key={folder.id} 
       to={`/folder/${folder.id}`}>
-        <h2>{folder.name}</h2>
+        <div className="folder">
+          <h2>{folder.name}</h2>
+        </div>
       </Link>
     );
     return (
       <div>
         {folders}
         <Link 
-        className="new folder " 
+        className="newFolder " 
         to={`/addfolder`}
         >
-            <button type='button'>Add Folder</button>
+            <button id="addFolderButton"type='button'>Add Folder</button>
         </Link>
       </div>
     );
   }
 }
+
+Sidebar.propTypes = {
+  folders: PropTypes.array
+};

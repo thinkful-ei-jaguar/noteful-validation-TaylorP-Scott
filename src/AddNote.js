@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ApiContext from './context/ApiContext';
 // import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom'
 
 class AddNote extends Component {
@@ -80,9 +80,11 @@ class AddNote extends Component {
   }
 }
 
+AddNote.propTypes = {
+  history: PropTypes.object.isRequired,
+  addNote: PropTypes.func.isRequired
+}; 
+
 export default withRouter(AddNote)
 
-// AddNote.propTypes = {
-//   name: PropTypes.string.isRequired,
-//   content: PropTypes.string.isRequired
-// };
+

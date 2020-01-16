@@ -1,6 +1,7 @@
 import React from 'react';
 import './Notes.css';
 import ApiContext from './context/ApiContext';
+import PropTypes from 'prop-types'
 
 
 export default class Note extends React.Component {
@@ -9,7 +10,7 @@ export default class Note extends React.Component {
         const notes = this.context.notes
         .filter(note=>note.id===this.props.match.params.noteid)
         .map((note)=>
-        <div >
+        <div key={note.id}>
             <h2>{note.name}</h2>
             <h3>date modified:{note.modified}</h3>
             <p>{note.content}</p>
@@ -23,3 +24,9 @@ export default class Note extends React.Component {
       );
     }
   }
+
+  Note.propTypes = {
+    notes: PropTypes.array,
+    deletehandlenote: PropTypes.func,
+    history: PropTypes.object
+  };
