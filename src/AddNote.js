@@ -7,7 +7,7 @@ import {withRouter} from 'react-router-dom'
 class AddNote extends Component {
   static contextType = ApiContext;
 
-  handleNoteSubmit = (event, name, content, folder) =>{
+  handleNoteSubmit = (name, content, folder) =>{
     let tempDate = new Date();
     let date = tempDate.getFullYear() + '-' + (tempDate.getMonth()+1) + '-' + tempDate.getDate() +'T'+ tempDate.getHours()+':'+ tempDate.getMinutes()+':'+ tempDate.getSeconds()+'Z';
     
