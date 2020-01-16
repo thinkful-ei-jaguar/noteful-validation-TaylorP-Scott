@@ -14,8 +14,8 @@ export default class Notes extends React.Component {
         const notes = this.context.notes
         .filter(note => note.folderId === this.props.match.params.folderid)
         .map((note)=>
-        <div key={note.id}>
-          <Link className="folder box" id={note.id} to={`/note/${note.id}`}>
+        <div key={note.id} className='note-list' >
+          <Link className="note-box" id={note.id} to={`/note/${note.id}`}>
             <h2 >{note.name}</h2>
           </Link>
           <button  type="button" onClick={()=>this.context.deletehandlenote(note.id)}>delete</button>
@@ -30,7 +30,7 @@ export default class Notes extends React.Component {
               className="new note " 
               to={`/addNote`}
             >
-            <button type='button'>Add Note</button>
+            <button type='button' id='add-note' >Add Note</button>
             </Link>
         </div>
       );

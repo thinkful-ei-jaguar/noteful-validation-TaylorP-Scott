@@ -24,3 +24,44 @@
     padding: 3px;
     border-radius: 5px;
 }
+
+.note-box {
+    text-decoration: none;
+}
+
+.note-list {
+    margin: 5px 10px;
+    border: 1px solid grey;
+    min-width: 300px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: lightblue;
+    padding: 5px;
+}
+
+.note-list h2 {
+    color: rgb(255, 255, 255);
+}
+
+#add-note {
+    margin-left: 36%;
+    padding: 3px;
+    border-radius: 5px;
+    width: 100px;
+}
+
+.header-link {
+    text-decoration: none;
+}
+
+.header {
+    font-size: 32px;
+    margin: 10px 15px;
+    border: 5px solid lightblue;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.header h1 {
+    color: lightblue;
+}
