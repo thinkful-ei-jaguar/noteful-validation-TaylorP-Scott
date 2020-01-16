@@ -18,7 +18,7 @@ export default class Notes extends React.Component {
           <Link className="note-box" id={note.id} to={`/note/${note.id}`}>
             <h2 >{note.name}</h2>
           </Link>
-          <button  type="button" onClick={()=>this.context.deletehandlenote(note.id)}>delete</button>
+          <button id='note-list-delete' type="button" onClick={()=>this.context.deletehandlenote(note.id)}>Delete</button>
         </div>
       );
       return (

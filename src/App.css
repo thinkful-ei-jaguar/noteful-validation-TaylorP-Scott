@@ -20,9 +20,16 @@
 }
 
 #addFolderButton {
-    margin-left: 35%;
-    padding: 3px;
+    margin: 0 25px;
+    padding: 5px;
     border-radius: 5px;
+    width: 75%;
+}
+
+.sidebar {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
 }
 
 .note-box {
@@ -44,10 +51,11 @@
 }
 
 #add-note {
-    margin-left: 36%;
+    margin-left: 35%;
     padding: 3px;
     border-radius: 5px;
     width: 100px;
+    margin-top: 10px;
 }
 
 .header-link {
@@ -64,4 +72,18 @@
 
 .header h1 {
     color: lightblue;
+}
+
+#note-list-delete {
+    width: 30%;
+    padding: 3px;
+}
+
+.delete-folder-button {
+    color: red;
+    font-weight: 700;
+    border: none;
+    background-color: lightblue;
+    display: flex;
+    justify-self: flex-end;
 }

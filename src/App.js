@@ -76,6 +76,33 @@ export default class App extends React.Component {
     
   }
 
+  deletehandleFolder = (id) =>{
+    const newFolders = this.state.folders.filter(folders =>
+    folders.id !== id
+    )
+    this.setState({
+      folders: newFolders,
+    })
+    return fetch(`http://localhost:9090/folders/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      },
+    })
+    .then(res => {
+      if (!res.ok) {
+        return res.json().then(error => { 
+          throw error
+        })
+      }
+      return res.json()
+    })
+    .catch(error => {
+      console.error(error)
+    })
+    
+  }
+
   addFolder = (value) => {
     this.setState({
       folders: [...this.state.folders, value]
@@ -101,7 +128,8 @@ export default class App extends React.Component {
                 notes: this.state.notes,
                 deletehandlenote: this.deletehandlenote,
                 addFolder: this.addFolder,
-                addNote: this.addNote
+                addNote: this.addNote,
+                deletehandleFolder: this.deletehandleFolder
             }}>
           <Sidebar />
     
