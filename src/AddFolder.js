@@ -5,7 +5,8 @@ import ApiContext from './context/ApiContext'
 class AddFolder extends React.Component {
   static contextType = ApiContext;
   
-  handleSubmit = (value) =>{
+  handleSubmit = (event, value) =>{
+    event.preventDefault();
     fetch(`http://localhost:9090/folders`, {
       method: 'POST',
         headers: {
@@ -23,6 +24,7 @@ class AddFolder extends React.Component {
       })
       .then(data=>{
         this.context.addFolder(data)
+        this.props.history.push(`/folder/${data.id}`)
       })
       .catch(err =>{
         console.error(err);
@@ -35,10 +37,10 @@ class AddFolder extends React.Component {
 
 
   render(){
-    console.log(this.props)
+    //console.log(this.props)
     return(
       <div>
-        <form onSubmit={(event) => this.handleSubmit(event.target.folderNameInput.value)}>
+        <form onSubmit={(event) => this.handleSubmit(event, event.target.folderNameInput.value)}>
           <input type='text' name='folderNameInput' id='folderNameInput' >
           </input>
           <button type='submit'>Add Folder</button>

@@ -7,7 +7,8 @@ import {withRouter} from 'react-router-dom'
 class AddNote extends Component {
   static contextType = ApiContext;
 
-  handleNoteSubmit = (name, content, folder) =>{
+  handleNoteSubmit = (event, name, content, folder) =>{
+    event.preventDefault();
     let tempDate = new Date();
     let date = tempDate.getFullYear() + '-' + (tempDate.getMonth()+1) + '-' + tempDate.getDate() +'T'+ tempDate.getHours()+':'+ tempDate.getMinutes()+':'+ tempDate.getSeconds()+'Z';
     
@@ -33,7 +34,7 @@ class AddNote extends Component {
       })
       .then(data => {
         this.context.addNote(data)
-        this.props.history.push('/folder')
+        this.props.history.push(`/folder/${folder}`)
       })
 
       .catch(err => {
@@ -56,7 +57,7 @@ class AddNote extends Component {
  
     return(
       <>
-      <form className='add-note-form' onSubmit={(event) => this.handleNoteSubmit( 
+      <form className='add-note-form' onSubmit={(event) => this.handleNoteSubmit( event,
         event.target.noteNameInput.value,
         event.target.noteContentInput.value,
         event.target.folderInput.value
