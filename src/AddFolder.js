@@ -1,7 +1,7 @@
-import React from 'react'
-import ApiContext from './context/ApiContext'
+import React from 'react';
+import ApiContext from './context/ApiContext';
 import PropTypes from 'prop-types';
-
+import './AddFolder.css';
 
 class AddFolder extends React.Component {
   static contextType = ApiContext;
@@ -37,11 +37,11 @@ class AddFolder extends React.Component {
   render(){
     //console.log(this.props)
     return(
-      <div>
+      <div className="addFolderForm">
         <form onSubmit={(event) => this.handleSubmit(event, event.target.folderNameInput.value)}>
-          <input type='text' name='folderNameInput' id='folderNameInput' >
+          <input className='addFolderInput' type='text' name='folderNameInput' id='folderNameInput' >
           </input>
-          <button type='submit'>Add Folder</button>
+          <button className='addFolderButton1' type='submit'>Add Folder</button>
         </form>
       </div>
     )

@@ -1,0 +1,47 @@
+.add-note-form{
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.form{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.labelNameInput{
+  display: flex;
+  align-items: center;
+}
+
+.note-name-input{
+  margin: 15px;
+  width: 220px;
+  height: 20px;
+}
+
+.labelContentInput{
+  display: flex;
+  align-items: center;
+}
+
+.note-content-input{
+  margin: 15px;
+}
+
+.folder-input{
+  margin: 15px;
+  height: 40px;
+  padding: 15px;
+}
+
+.submitButton{
+  height: 30px;
+  border-radius: 5px;
+  width: 50%;
+  margin: 0 auto;
+}

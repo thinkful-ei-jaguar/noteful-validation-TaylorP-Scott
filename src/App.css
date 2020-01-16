@@ -51,10 +51,12 @@
 }
 
 #add-note {
-    margin-left: 35%;
+    margin-left: 28%;
+    margin-bottom: 50px;
+    height: 25px;
     padding: 3px;
     border-radius: 5px;
-    width: 100px;
+    width: 150px;
     margin-top: 10px;
 }
 

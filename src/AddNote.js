@@ -3,6 +3,7 @@ import ApiContext from './context/ApiContext';
 // import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom'
+import './AddNote.css'
 
 class AddNote extends Component {
   static contextType = ApiContext;
@@ -56,26 +57,26 @@ class AddNote extends Component {
     })
  
     return(
-      <>
-      <form className='add-note-form' onSubmit={(event) => this.handleNoteSubmit( event,
+      <div className='add-note-form'>
+      <form className="form" onSubmit={(event) => this.handleNoteSubmit( event,
         event.target.noteNameInput.value,
         event.target.noteContentInput.value,
         event.target.folderInput.value
         )}>
 
-        <label htmlFor='note-name-input'>Note Name:
+        <label className="labelNameInput" htmlFor='note-name-input'>Note Name:
         <input type='text' className='note-name-input' id='note-name-input' name='noteNameInput' ></input>
         </label>
-        <label htmlFor='note-content-input'>Content:
+        <label className="labelContentInput" htmlFor='note-content-input'>Content:
         <textarea rows='4' cols='50' className='note-content-input' name='noteContentInput' ></textarea>
         </label>
         <select className='folder-input' name='folderInput' >
           {folderList}
         </select>
        
-        <button type='submit'>Submit</button>
+        <button className="submitButton" type='submit'>Submit</button>
       </form>
-      </>
+      </div>
     );
   }
 }
