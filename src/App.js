@@ -9,7 +9,7 @@ import ApiContext from './context/ApiContext';
 import AddFolder from './AddFolder';
 import AddNote from './AddNote';
 import BoundaryError from './BoundaryError';
-
+import { Link } from 'react-router-dom';
 export default class App extends React.Component {
   constructor(props){
     super(props)
@@ -119,10 +119,11 @@ export default class App extends React.Component {
   render(){
     return (
       <>
-        <main>
-          <Route path='/' component={Home} /> 
-        </main>
-        <div className="holder">
+         <header className='header' >
+            <Link to={'/'} className='header-link' >
+              <h1>Noteful</h1>
+            </Link>
+          </header>  
   
         <ApiContext.Provider value={{
                 folders: this.state.folders,
@@ -132,9 +133,12 @@ export default class App extends React.Component {
                 addNote: this.addNote,
                 deletehandleFolder: this.deletehandleFolder
             }}>
+      
+        <div className="holder">
           <Sidebar />
     
           <Switch>
+            <Route exact path='/' component={Home} /> 
             <Route 
             path='/folder/:folderid'
             render={props => <Notes {...props} />}
@@ -154,8 +158,9 @@ export default class App extends React.Component {
               />
             </BoundaryError>
           </Switch>
+          </div>
         </ApiContext.Provider>
-        </div>
+        
       </>
     );
   }

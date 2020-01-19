@@ -3,8 +3,16 @@ import ApiContext from './context/ApiContext';
 import PropTypes from 'prop-types'
 import './note.css'
 
+function change(time) { var r = time.match(/^\s*([0-9]+)\s*-\s*([0-9]+)\s*-\s*([0-9]+)(.*)$/); 
+  
+return r[2]+"-"+r[3]+"-"+r[1]+r[4]; }
+
+console.log(change("2019-01-03 T00:00:00.000Z"));
+
+
 
 export default class Note extends React.Component {
+  
         static contextType = ApiContext;
         render(){
         const notes = this.context.notes
