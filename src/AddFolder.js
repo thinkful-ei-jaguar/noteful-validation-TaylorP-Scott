@@ -55,5 +55,3 @@ AddFolder.propTypes = {
 }; 
 
 export default AddFolder;
-
-
