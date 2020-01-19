@@ -8,8 +8,8 @@ export default class Note extends React.Component {
         static contextType = ApiContext;
         render(){
         const notes = this.context.notes
-        .filter(note=>note.id===this.props.match.params.noteid)
-        .map((note)=>
+        .filter(note => note.id === this.props.match.params.noteid)
+        .map((note) =>
         <div key={note.id}>
             <h2 className='noteTitle'>{note.name}</h2>
             <h3 className='noteDate'>Date Created: {note.modified}</h3>

@@ -65,12 +65,12 @@ class AddNote extends Component {
         )}>
 
         <label className="labelNameInput" htmlFor='note-name-input'>Note Name:
-        <input type='text' className='note-name-input' id='note-name-input' name='noteNameInput' ></input>
+        <input type='text' className='note-name-input' id='note-name-input' name='noteNameInput' required></input>
         </label>
         <label className="labelContentInput" htmlFor='note-content-input'>Content:
-        <textarea rows='4' cols='50' className='note-content-input' name='noteContentInput' ></textarea>
+        <textarea rows='4' cols='50' className='note-content-input' name='noteContentInput' required></textarea>
         </label>
-        <select className='folder-input' name='folderInput' >
+        <select className='folder-input' name='folderInput' required>
           {folderList}
         </select>
        
