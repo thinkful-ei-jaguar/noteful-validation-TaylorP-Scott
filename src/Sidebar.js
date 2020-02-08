@@ -18,7 +18,7 @@ export default class Sidebar extends React.Component {
       key={folder.id} 
       to={`/folder/${folder.id}`}>
         <div className="folder">
-          <h2>{folder.name}</h2>
+          <h2>{folder.folder_name}</h2>
           <button type='button' id='delete-note' className='delete-folder-button' onClick={()=>this.context.deletehandleFolder(folder.id)}>X</button>
         </div>
       </Link>

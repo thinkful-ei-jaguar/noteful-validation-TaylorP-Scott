@@ -3,7 +3,8 @@ import ApiContext from './context/ApiContext';
 // import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom'
-import './AddNote.css'
+import './AddNote.css';
+import config from './config';
 
 class AddNote extends Component {
   static contextType = ApiContext;
@@ -13,16 +14,16 @@ class AddNote extends Component {
     let tempDate = new Date();
     let date = tempDate.getFullYear() + '-' + (tempDate.getMonth()+1) + '-' + tempDate.getDate() +'T'+ tempDate.getHours()+':'+ tempDate.getMinutes()+':'+ tempDate.getSeconds()+'Z';
     
-    fetch(`http://localhost:9090/notes`, {
+    fetch(config.API_ENDPOINT + `/notes`, {
       method: 'POST',
         headers: {
           'content-type': 'application/json'
         },
         body: JSON.stringify({
-          name: name,
+          note_name: name,
           content: content,
           modified: date,
-          folderId: folder
+          folder_id: folder
         })
       })
       .then(res=>{
@@ -52,7 +53,7 @@ class AddNote extends Component {
   render(){ 
     const folderList = this.context.folders.map(folder=>{
       return(
-      <option key={folder.id} value={folder.id} id={folder.id} >{folder.name}</option>
+      <option key={folder.id} value={folder.id} id={folder.id} >{folder.folder_name}</option>
       );
     })
  

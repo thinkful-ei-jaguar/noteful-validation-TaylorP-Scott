@@ -10,7 +10,7 @@ export default class Home extends React.Component {
       .map((note) =>
       <div key={note.id} className='note-list' >
         <Link className="note-box" id={note.id} to={`/note/${note.id}`}>
-          <h2 >{note.name}</h2>
+          <h2 >{note.note_name}</h2>
         </Link>
         <button id='note-list-delete' type="button" onClick={()=>this.context.deletehandlenote(note.id)}>Delete</button>
       </div>

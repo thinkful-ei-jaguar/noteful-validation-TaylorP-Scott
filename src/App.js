@@ -8,8 +8,12 @@ import { Route, Switch } from 'react-router-dom';
 import ApiContext from './context/ApiContext';
 import AddFolder from './AddFolder';
 import AddNote from './AddNote';
+import EditNote from './EditNote';
 import BoundaryError from './BoundaryError';
 import { Link } from 'react-router-dom';
+import config from './config';
+
+
 export default class App extends React.Component {
   constructor(props){
     super(props)
@@ -19,9 +23,10 @@ export default class App extends React.Component {
       error: null
     }
   }
+
   
-  componentDidMount(){
-      fetch(`http://localhost:9090/folders`, {
+  componentDidMount(){ 
+    fetch(config.API_ENDPOINT + `/folders`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json'
@@ -34,7 +39,7 @@ export default class App extends React.Component {
       })
       
       })
-      fetch(`http://localhost:9090/notes`, {
+      fetch(config.API_ENDPOINT + `/notes`, {
         method: 'GET',
         headers: {
           'content-type': 'application/json'
@@ -46,7 +51,6 @@ export default class App extends React.Component {
           notes:data,
         })
       })
-      
   }
 
 
@@ -57,7 +61,7 @@ export default class App extends React.Component {
     this.setState({
       notes: newNotes,
     })
-    return fetch(`http://localhost:9090/notes/${id}`, {
+    return fetch(config.API_ENDPOINT + `/notes/${id}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -84,7 +88,7 @@ export default class App extends React.Component {
     this.setState({
       folders: newFolders,
     })
-    return fetch(`http://localhost:9090/folders/${id}`, {
+    return fetch(config.API_ENDPOINT + `/folders/${id}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -116,6 +120,14 @@ export default class App extends React.Component {
     })
   }
 
+  updateNote = (updatedNote) => {
+    this.setState({
+      folders: [...this.state.folders],
+      notes: this.state.notes.map(note => 
+        (note.id !== Number(updatedNote.id)) ? note : updatedNote)
+    })
+  }
+
   render(){
     return (
       <>
@@ -131,7 +143,8 @@ export default class App extends React.Component {
                 deletehandlenote: this.deletehandlenote,
                 addFolder: this.addFolder,
                 addNote: this.addNote,
-                deletehandleFolder: this.deletehandleFolder
+                deletehandleFolder: this.deletehandleFolder,
+                updateNote: this.updateNote
             }}>
       
         <div className="holder">
@@ -156,6 +169,11 @@ export default class App extends React.Component {
               path='/addNote'
               render={(props,history) => <AddNote {...props}  />}
               />
+              <Route 
+              path='/edit-note/:noteid'
+              render={(props,history) => <EditNote {...props}  />}
+              />
+
             </BoundaryError>
           </Switch>
           </div>

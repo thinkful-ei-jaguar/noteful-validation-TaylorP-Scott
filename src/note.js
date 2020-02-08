@@ -2,6 +2,7 @@ import React from 'react';
 import ApiContext from './context/ApiContext';
 import PropTypes from 'prop-types'
 import './note.css'
+import { Link } from 'react-router-dom';
 
 function change(time) { 
 
@@ -20,13 +21,17 @@ export default class Note extends React.Component {
         static contextType = ApiContext;
         render(){
         const notes = this.context.notes
-        .filter(note => note.id === this.props.match.params.noteid)
+        .filter(note => note.id === Number(this.props.match.params.noteid)) 
+        
         .map((note) =>
         <div key={note.id}>
-            <h2 className='noteTitle'>{note.name}</h2>
+            <h2 className='noteTitle'>{note.note_name}</h2>
             <h3 className='noteDate'>Modified: {change(note.modified)}</h3>
             <p className='noteContent'>{note.content}</p>
             <button className='noteDeleteButton'type="button" onClick={()=>this.context.deletehandlenote(note.id).then(()=>{this.props.history.push('/')})}>delete</button>
+            <Link to={`/edit-note/${note.id}`}>
+            <button className='noteEditButton'type="button">edit</button>
+            </Link>
         </div>
       );
       return (
